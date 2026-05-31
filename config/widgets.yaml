@@ -1,0 +1,26 @@
+---
+# https://gethomepage.dev/configs/info-widgets/
+
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+
+- search:
+    provider: duckduckgo
+    target: _blank
+
+- datetime:
+    text_size: xl
+    format:
+      timeStyle: short
+      dateStyle: long
+      hour12: false
+
+- openmeteo:
+    label: Москва
+    latitude: 55.7558
+    longitude: 37.6173
+    timezone: Europe/Moscow
+    units: metric
+    cache: 15

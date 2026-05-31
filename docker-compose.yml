@@ -1,0 +1,14 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - /opt/homepage/config:/app/config
+      - /opt/homepage/images:/app/public/images
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=Europe/Moscow
+      - HOMEPAGE_ALLOWED_HOSTS=homepage.bizzon8n.ru,192.168.10.22,localhost,127.0.0.1

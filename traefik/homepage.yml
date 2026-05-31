@@ -1,0 +1,37 @@
+http:
+  routers:
+    homepage-redirect:
+      rule: "Host(`homepage.bizzon8n.ru`)"
+      entryPoints:
+        - web
+      middlewares:
+        - redirect-to-https
+      service: noop@internal
+
+    homepage-outpost:
+      rule: "Host(`homepage.bizzon8n.ru`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      entryPoints:
+        - websecure
+      service: authentik-service@file
+      tls:
+        certResolver: letsencrypt
+      middlewares:
+        - default-headers
+      priority: 200
+
+    homepage:
+      rule: "Host(`homepage.bizzon8n.ru`) && !PathPrefix(`/outpost.goauthentik.io/`)"
+      entryPoints:
+        - websecure
+      service: homepage-service
+      tls:
+        certResolver: letsencrypt
+      middlewares:
+        - authentik
+        - default-headers
+
+  services:
+    homepage-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.22:3000"

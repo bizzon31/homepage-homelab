@@ -1,0 +1,47 @@
+/* Фон на весь экран */
+.fixed.inset-0 img {
+  object-fit: cover !important;
+  object-position: center center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Карточки сервисов — непрозрачность 70% */
+.service-card {
+  background-color: rgba(15, 23, 42, 0.70) !important;
+}
+
+.service-card:hover {
+  background-color: rgba(30, 41, 59, 0.75) !important;
+}
+
+/* Строки виджетов в карточках */
+.service-card .rounded-sm {
+  background-color: rgba(30, 41, 59, 0.70) !important;
+}
+
+/* Закладки */
+.bookmark {
+  background-color: rgba(15, 23, 42, 0.70) !important;
+}
+
+.bookmark-icon {
+  background-color: rgba(30, 41, 59, 0.72) !important;
+}
+
+/* Виджеты шапки */
+.widget-container {
+  background-color: rgba(15, 23, 42, 0.70) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.6rem;
+}
+
+.information-widget-search input {
+  background-color: rgba(30, 41, 59, 0.70) !important;
+}
+
+.information-widget-search button {
+  background-color: rgba(51, 65, 85, 0.72) !important;
+}

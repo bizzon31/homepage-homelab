@@ -1,0 +1,8 @@
+# Фон дашборда (не в git — ~260 КБ, хранится на сервере)
+images/background.jpg
+
+# macOS
+.DS_Store
+
+# Логи Homepage на сервере (если копируете config/logs локально)
+config/logs/

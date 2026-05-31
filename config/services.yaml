@@ -1,0 +1,139 @@
+# /opt/homepage/config/services.yaml — LXC 1013 (S2)
+
+- Медиа:
+    - Jellyfin:
+        icon: jellyfin.png
+        href: https://jellyfin.bizzon8n.ru
+        description: Медиасервер
+    - TrueNAS:
+        icon: truenas.png
+        href: https://truenas.bizzon8n.ru/ui/
+        description: NAS хранилище
+
+- Облако:
+    - Nextcloud:
+        icon: nextcloud.png
+        href: https://nextcloud.bizzon8n.ru
+        description: Файлы и синхронизация
+    - Joplin:
+        icon: joplin.png
+        href: https://joplin.bizzon8n.ru
+        description: Заметки
+
+- Финансы:
+    - Курсы ЦБ РФ:
+        icon: mdi-currency-rub
+        href: https://www.cbr.ru/currency_base/daily/
+        description: ЦБ РФ, ₽ за 1 единицу
+        widget:
+          type: customapi
+          url: https://www.cbr-xml-daily.ru/daily_json.js
+          refreshInterval: 3600000
+          display: list
+          mappings:
+            - field: Valute.USD.Value
+              label: USD
+              format: float
+              suffix: " ₽"
+            - field: Valute.EUR.Value
+              label: EUR
+              format: float
+              suffix: " ₽"
+            - field: Valute.CNY.Value
+              label: CNY
+              format: float
+              suffix: " ₽"
+            - field: Valute.GBP.Value
+              label: GBP
+              format: float
+              suffix: " ₽"
+    - Криптовалюты:
+        icon: mdi-bitcoin
+        href: https://www.coingecko.com/
+        description: CoinGecko, ₽ и изменение за 24ч
+        widget:
+          type: customapi
+          url: https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,tether&vs_currencies=rub&include_24hr_change=true
+          refreshInterval: 300000
+          headers:
+            User-Agent: Homepage-Bizzon-Homelab (https://homepage.bizzon8n.ru)
+          display: list
+          mappings:
+            - field: bitcoin.rub
+              label: BTC
+              format: float
+              suffix: " ₽"
+              additionalField:
+                field: bitcoin.rub_24h_change
+                format: percent
+            - field: ethereum.rub
+              label: ETH
+              format: float
+              suffix: " ₽"
+              additionalField:
+                field: ethereum.rub_24h_change
+                format: percent
+            - field: solana.rub
+              label: SOL
+              format: float
+              suffix: " ₽"
+              additionalField:
+                field: solana.rub_24h_change
+                format: percent
+            - field: tether.rub
+              label: USDT
+              format: float
+              suffix: " ₽"
+              additionalField:
+                field: tether.rub_24h_change
+                format: percent
+
+- Инфраструктура:
+    - Proxmox S1:
+        icon: proxmox.png
+        href: https://77.51.218.207:8016
+        description: S1 pve (.10)
+    - Proxmox S2:
+        icon: proxmox.png
+        href: https://77.51.218.207:8006
+        description: S2 pve (.11)
+    - Proxmox S3:
+        icon: proxmox.png
+        href: https://77.51.218.207:8026
+        description: S3 LLM-PC (.60)
+    - Traefik:
+        icon: traefik.png
+        href: https://traefik.bizzon8n.ru
+        description: Reverse proxy
+    - Authentik:
+        icon: mdi-shield-key-outline
+        href: https://authentik.bizzon8n.ru
+        description: SSO, управление доступом
+
+- Проекты:
+    - Building Clima:
+        icon: mdi-home-thermometer-outline
+        href: https://building-clima.ru
+        description: building-clima.ru (VM .56)
+    - Fragrance Pro:
+        icon: mdi-spray
+        href: https://fragrance-pro.shop
+        description: fragrance-pro.shop (VM .55)
+    - Stone Sand:
+        icon: mdi-domain
+        href: https://stone-sand.ru
+        description: stone-sand.ru (VM .90)
+
+- Управление:
+    - RU-CENTER:
+        icon: mdi-web
+        href: https://www.nic.ru/
+        description: Домены, DNS, nic.ru
+    - VK WorkSpace:
+        icon: mdi-email-outline
+        href: https://app.workspace.vk.ru/
+        description: Почта и workspace
+    - HostVDS:
+        icon: mdi-server-network
+        href: https://hostvds.com/
+        description: VPS и хостинг
