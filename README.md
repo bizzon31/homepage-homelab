@@ -50,3 +50,21 @@ pct exec 1012 -- docker restart traefik
 ## Документация homelab
 
 Подробнее: wiki **`homepage.md`** в репозитории SetServer / knowledge-base.
+
+## Публикация на GitHub
+
+Локальный git уже инициализирован. Один раз:
+
+```bash
+gh auth login
+cd homepage-homelab
+gh repo create homepage-homelab --public --source=. --remote=origin --push \
+  --description "Homepage dashboard — Bizzon homelab"
+```
+
+Или создайте репозиторий вручную на github.com и:
+
+```bash
+git remote add origin git@github.com:bizzon31/homepage-homelab.git
+git push -u origin main
+```
