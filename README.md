@@ -2,6 +2,8 @@
 
 Конфигурация [gethomepage/homepage](https://github.com/gethomepage/homepage) для **`https://homepage.bizzon8n.ru`**.
 
+**Репозиторий:** https://github.com/bizzon31/homepage-homelab
+
 | Параметр | Значение |
 |----------|----------|
 | Хост | S2, LXC **1013**, IP **192.168.10.22** |
