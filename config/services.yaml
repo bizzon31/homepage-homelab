@@ -89,6 +89,43 @@
                 format: percent
 
 - Инфраструктура:
+    - Температуры:
+        icon: mdi-thermometer-lines
+        description: CPU/GPU homelab (lm-sensors)
+        widget:
+          type: customapi
+          url: http://192.168.10.22:3080/sensors.json
+          refreshInterval: 300000
+          display: list
+          mappings:
+            - field: nodes.S1.cpu
+              label: S1 CPU
+              format: float
+              suffix: " °C"
+            - field: nodes.S1.gpu
+              label: S1 GPU
+              format: float
+              suffix: " °C"
+            - field: nodes.S2.cpu0
+              label: S2 CPU0
+              format: float
+              suffix: " °C"
+            - field: nodes.S2.cpu1
+              label: S2 CPU1
+              format: float
+              suffix: " °C"
+            - field: nodes.S2.chipset
+              label: S2 chipset
+              format: float
+              suffix: " °C"
+            - field: nodes.LLM-PC.cpu
+              label: LLM-PC
+              format: float
+              suffix: " °C"
+            - field: nodes.S3.cpu
+              label: S3 CPU
+              format: float
+              suffix: " °C"
     - Proxmox S1:
         icon: proxmox.png
         href: https://77.51.218.207:8016
@@ -100,7 +137,15 @@
     - Proxmox S3:
         icon: proxmox.png
         href: https://77.51.218.207:8026
-        description: S3 LLM-PC (.60)
+        description: S3 pve (.60)
+    - LLM-PC:
+        icon: proxmox.png
+        href: https://77.51.218.207:8036
+        description: llm-pc pve (.70)
+    - PDM:
+        icon: proxmox.png
+        href: https://pdm.bizzon8n.ru
+        description: Datacenter Manager (.12)
     - Traefik:
         icon: traefik.png
         href: https://traefik.bizzon8n.ru

@@ -26,6 +26,21 @@ done
 scp -P "$SSH_PORT" "$ROOT/docker-compose.yml" "$REMOTE:/tmp/homepage-docker-compose.yml"
 ssh -p "$SSH_PORT" "$REMOTE" "pct push $LXC /tmp/homepage-docker-compose.yml /opt/homepage/docker-compose.yml"
 
-ssh -p "$SSH_PORT" "$REMOTE" "pct exec $LXC -- bash -c 'cd /opt/homepage && docker-compose up -d'"
+scp -P "$SSH_PORT" -r "$ROOT/sensors/"* "$REMOTE:/tmp/homepage-sensors/"
+ssh -p "$SSH_PORT" "$REMOTE" "pct push $LXC /tmp/homepage-sensors/collect_and_serve.py /opt/homepage/sensors/collect_and_serve.py"
+ssh -p "$SSH_PORT" "$REMOTE" "pct push $LXC /tmp/homepage-sensors/homepage-sensors.service /opt/homepage/sensors/homepage-sensors.service"
+
+ssh -p "$SSH_PORT" "$REMOTE" "pct exec $LXC -- bash -c '
+  install -m 644 /opt/homepage/sensors/homepage-sensors.service /etc/systemd/system/homepage-sensors.service
+  systemctl daemon-reload
+  systemctl enable homepage-sensors.service
+  systemctl restart homepage-sensors.service
+  cd /opt/homepage && docker-compose up -d
+  docker-compose restart homepage 2>/dev/null || true
+'"
+
+echo "==> Проверка sensors API"
+ssh -p "$SSH_PORT" "$REMOTE" "pct exec $LXC -- curl -fsS http://127.0.0.1:3080/sensors.json | head -c 400"
+echo ""
 
 echo "==> Готово. Проверка: https://homepage.bizzon8n.ru"

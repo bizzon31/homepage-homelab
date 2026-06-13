@@ -1,0 +1,17 @@
+[Unit]
+Description=Homepage homelab temperature collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/homepage/sensors
+Environment=SENSORS_SSH_KEY=/opt/homepage/sensors/ssh/id_ed25519
+Environment=SENSORS_INTERVAL_SEC=300
+Environment=SENSORS_OUTPUT_PATH=/opt/homepage/sensors/data/sensors.json
+ExecStart=/usr/bin/python3 /opt/homepage/sensors/collect_and_serve.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
